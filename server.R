@@ -37,8 +37,8 @@ shinyServer(function(input, output, session) {
     message("responses")
     GET(responses_url) %>% content() %>%
       mutate(datetime = mdy_hm(datetime)) %>%
-      filter(datetime >= questions()$from_timestamp &&
-               datetime <= questions()$to_timestamp) %>%
+      filter(datetime >= questions()$from_timestamp) %>%
+      filter(datetime <= questions()$to_timestamp) %>% 
       left_join(answers(), by="button")
   })
   
